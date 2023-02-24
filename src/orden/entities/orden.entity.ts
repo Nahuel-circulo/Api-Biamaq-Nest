@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { Cliente } from './cliente.entity';
+import { Producto } from './producto.entity';
 import { Tecnico } from './tecnico.entity';
 
 @Entity({ name: 'TEC0011' })
@@ -48,10 +49,9 @@ export class Orden extends BaseEntity {
     TOTAL: number;
 
 
-    @Column({
-        type: 'varchar'
-    })
-    NROSERIECOMPONENTE: string;
+    @ManyToOne(() => Producto)
+    @JoinColumn({name:'NROSERIECOMPONENTE'})
+    INFO_COMPONENTE: Producto;
 
 
     @Column({

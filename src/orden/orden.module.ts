@@ -5,6 +5,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Orden } from './entities/orden.entity';
 import { Tecnico } from './entities/tecnico.entity';
 import { Cliente } from './entities/cliente.entity';
+import { Producto } from './entities/producto.entity';
+import { Modelo } from './entities/modelo.entity';
+import { Componente } from './entities/componente.entity';
+import { Marca } from './entities/marca.entity';
 
 @Module({
   controllers: [OrdenController],
@@ -12,7 +16,11 @@ import { Cliente } from './entities/cliente.entity';
   imports: [TypeOrmModule.forFeature([
     Orden,
     Tecnico,
-    Cliente
+    Cliente,
+    Producto,
+    Modelo, 
+    Componente, 
+    Marca
   ])],
   exports: [OrdenService, TypeOrmModule]
 })

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import {  Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 import { Orden } from './entities/orden.entity';
 import { Tecnico } from './entities/tecnico.entity';
@@ -20,13 +20,20 @@ export class OrdenService {
 
   async findAll() {
 
-    
-  
+
+
     const ordenes = await this.ordenRepository.find({
-      take:10,
-      relations:{
-        TECNICO:true,
-        CLIENTE:true
+      take: 10,
+      relations: {
+        TECNICO: true,
+        CLIENTE: true,
+        INFO_COMPONENTE: {
+          MODELO: {
+            MARCA: true
+          },
+          COMPONENTE: true
+        },
+
       }
     })
     /* const {IDTECNICO} = ordenes[0];
