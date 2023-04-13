@@ -20,7 +20,7 @@ export class OrdenService {
 
 
     const ordenes = await this.ordenRepository.find({
-      take: 10,
+      take: 100,
       //sin activar el eager en las entidades se puede cargar las relaciones asi
       // pero solo en el find
       /* relations: {
