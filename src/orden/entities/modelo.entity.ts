@@ -11,7 +11,7 @@ export class Modelo extends BaseEntity {
     @Column({ type: 'varchar' })
     DESCRIPCION: string;
 
-    @ManyToOne(() => Marca)
+    @ManyToOne(() => Marca,{eager:true})
     @JoinColumn({name:'IDMARCA'})
     MARCA: Marca;
 }

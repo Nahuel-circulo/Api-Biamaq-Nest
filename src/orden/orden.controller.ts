@@ -9,10 +9,10 @@ export class OrdenController {
 
 
 
-  @Get()
+/*   @Get()
   findAll() {
     return this.ordenService.findAll();
-  }
+  } */
 
   @Get(':id')
   findOne(@Param('id') id: string) {

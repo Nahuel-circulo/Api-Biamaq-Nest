@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -11,10 +11,7 @@ export class OrdenService {
   constructor(
 
     @InjectRepository(Orden)
-    private readonly ordenRepository: Repository<Orden>,
-
-    @InjectRepository(Tecnico)
-    private readonly tecnicosRepository: Repository<Orden>
+    private readonly ordenRepository: Repository<Orden>
 
   ) { }
 
@@ -24,7 +21,9 @@ export class OrdenService {
 
     const ordenes = await this.ordenRepository.find({
       take: 10,
-      relations: {
+      //sin activar el eager en las entidades se puede cargar las relaciones asi
+      // pero solo en el find
+      /* relations: {
         TECNICO: true,
         CLIENTE: true,
         INFO_COMPONENTE: {
@@ -34,21 +33,21 @@ export class OrdenService {
           COMPONENTE: true
         },
 
-      }
+      } */
     })
-    /* const {IDTECNICO} = ordenes[0];
-
-    const tecnico = await this.tecnicosRepository.find({where:{
-      IDTECNICO
-    }})
-
-    console.log(tecnico) */
-
     return ordenes;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} orden`;
+  async findOne(id: number) {
+    const orden = await this.ordenRepository.findOneBy({ NROORDEN: id })
+
+    if (!orden)
+      throw new NotFoundException(`Orden de reparacion con numero ${id} no existe`);
+
+
+    return orden
+
+
   }
 
 

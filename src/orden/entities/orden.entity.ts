@@ -32,13 +32,14 @@ export class Orden extends BaseEntity {
     })
     DESCRIPCIONREPARACION: string;
 
-
-    @ManyToOne(() => Cliente)
+    // eager en true carga las relaciones con las demas tablas
+    // para que aparezcan al hacer un find
+    @ManyToOne(() => Cliente,{eager:true})
     @JoinColumn({name:'IDCLIENTE'})
     CLIENTE: Cliente;
 
 
-    @ManyToOne(() => Tecnico)
+    @ManyToOne(() => Tecnico,{eager:true})
     @JoinColumn({name:'IDTECNICO'})
     TECNICO: Tecnico;
 
@@ -49,7 +50,7 @@ export class Orden extends BaseEntity {
     TOTAL: number;
 
 
-    @ManyToOne(() => Producto)
+    @ManyToOne(() => Producto,{eager:true})
     @JoinColumn({name:'NROSERIECOMPONENTE'})
     INFO_COMPONENTE: Producto;
 

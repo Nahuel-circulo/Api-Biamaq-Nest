@@ -11,11 +11,11 @@ export class Producto extends BaseEntity {
     })
     NROSERIE: string;
 
-    @ManyToOne(() => Componente)
+    @ManyToOne(() => Componente,{eager:true})
     @JoinColumn({name:'IDCOMPONENTE'})
     COMPONENTE: Componente;
 
-    @ManyToOne(() => Modelo)
+    @ManyToOne(() => Modelo,{eager:true})
     @JoinColumn({name:'IDMODELO'})
     MODELO: Modelo;
 
